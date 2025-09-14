@@ -1,0 +1,15 @@
+CREATE TABLE Machines (
+	Id SERIAL PRIMARY KEY,
+	Name VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE Failures (
+	Id SERIAL PRIMARY KEY,
+	MachineId INT NOT NULL REFERENCES Machines(Id) ON DELETE CASCADE,
+	 Name VARCHAR(255) NOT NULL,
+    Priority VARCHAR(20) CHECK (Priority IN ('Low', 'Medium', 'High')),
+    StartTime TIMESTAMP NOT NULL,
+    EndTime TIMESTAMP,
+    Description TEXT NOT NULL,
+    Status BOOLEAN NOT NULL DEFAULT FALSE
+);
